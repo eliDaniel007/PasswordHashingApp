@@ -1,0 +1,137 @@
+﻿<!-- 
+    Projet: Application de Hachage de Mots de Passe
+    Auteurs: Oumar Diogo Bah et Eli Daniel Senyo
+    Description: Interface graphique pour le hachage et la recherche de mots de passe
+                 dans un dictionnaire
+-->
+
+<Window x:Class="PasswordHashingApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hachage de Mots de Passe" Height="400" Width="700"
+        Background="#F0F0F0">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Zone de saisie du hash -->
+            <RowDefinition Height="Auto"/>
+            <!-- Informations sur le dictionnaire -->
+            <RowDefinition Height="Auto"/>
+            <!-- Statistiques -->
+            <RowDefinition Height="Auto"/>
+            <!-- Barre de progression -->
+            <RowDefinition Height="*"/>
+            <!-- Zone de log -->
+        </Grid.RowDefinitions>
+
+        <!-- Section 1: Zone de saisie du hash -->
+        <GroupBox Grid.Row="0" Header="Saisir votre hachage" Margin="0,0,0,10">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <!-- Zone de texte -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Bouton -->
+                </Grid.ColumnDefinitions>
+                <!-- Champ de saisie du hash -->
+                <TextBox x:Name="HashInputTextBox" 
+                         Margin="0,0,10,0"
+                         VerticalContentAlignment="Center"/>
+                <!-- Bouton de validation -->
+                <Button x:Name="ValidateButton" 
+                        Grid.Column="1"
+                        Content="Valider !"
+                        Width="100"
+                        Height="30"
+                        Click="ValidateButton_Click"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- Section 2: Sélection et affichage du dictionnaire -->
+        <GroupBox Grid.Row="1" Header="Dictionnaire" Margin="0,0,0,10">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <!-- Chemin du fichier -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Bouton parcourir -->
+                </Grid.ColumnDefinitions>
+                <!-- Affichage du chemin du dictionnaire -->
+                <TextBox x:Name="DictionaryPathTextBox" 
+                         IsReadOnly="True"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,10,0"/>
+                <!-- Bouton pour sélectionner le dictionnaire -->
+                <Button x:Name="BrowseButton"
+                        Grid.Column="1"
+                        Content="Parcourir..."
+                        Width="100"
+                        Click="BrowseButton_Click"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- Section 3: Affichage des statistiques -->
+        <GroupBox Grid.Row="2" Header="Statistiques" Margin="0,0,0,10">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Labels -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Valeurs 1 -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Labels -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Valeurs 2 -->
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Ligne 1 -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Ligne 2 -->
+                </Grid.RowDefinitions>
+
+                <!-- Nombre de mots dans le dictionnaire -->
+                <TextBlock Text="Mots dans le dictionnaire :" 
+                          Grid.Row="0" Grid.Column="0"
+                          Margin="0,0,10,5"/>
+                <TextBlock x:Name="DictionaryWordCountTextBlock"
+                          Grid.Row="0" Grid.Column="1"
+                          Text="0"
+                          Margin="0,0,20,5"/>
+
+                <!-- Nombre de tentatives -->
+                <TextBlock Text="Tentative :" 
+                          Grid.Row="0" Grid.Column="2"
+                          Margin="0,0,10,5"/>
+                <TextBlock x:Name="AttemptCountTextBlock"
+                          Grid.Row="0" Grid.Column="3"
+                          Text="0"
+                          Margin="0,0,0,5"/>
+
+                <!-- Temps écoulé -->
+                <TextBlock Text="Temps écoulé :" 
+                          Grid.Row="1" Grid.Column="0"
+                          Margin="0,0,10,5"/>
+                <TextBlock x:Name="ElapsedTimeTextBlock"
+                          Grid.Row="1" Grid.Column="1"
+                          Text="00:00:00"
+                          Margin="0,0,0,5"/>
+            </Grid>
+        </GroupBox>
+
+        <!-- Section 4: Barre de progression -->
+        <ProgressBar x:Name="ProgressBar"
+                     Grid.Row="3"
+                     Height="20"
+                     Margin="0,0,0,10"/>
+
+        <!-- Section 5: Zone de log pour les messages -->
+        <TextBox x:Name="LogTextBox"
+                 Grid.Row="4"
+                 IsReadOnly="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 Background="White"
+                 BorderBrush="#CCCCCC"/>
+    </Grid>
+</Window>
